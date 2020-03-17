@@ -401,3 +401,19 @@ test('blood on the had', () => {
   const expected = 'No viremia of pandemic (H1N1) 2009 was demonstrated in <span id=\"highlight-0\" class=\"extra-bold\">blood</span> donors who <span id=\"highlight-2\" class=\"extra-bold\">had</span> donated <span id=\"highlight-1\" class=\"extra-bold\">blood</span> during the probable incubation period.'
   expect(received).toBe(expected)
 })
+
+test('(cancer NOT blood)', () => {
+  const query = '(cancer NOT blood)'
+  const content = 'Supramolecular self-assembly of a hybrid \'hyalurosome\' for targeted photothermal therapy in non-small cell lung cancer.'
+  const received = highlightByQuery(query, content, options)
+  const expected = 'Supramolecular self-assembly of a hybrid \'hyalurosome\' for targeted photothermal therapy in non-small cell lung <span id=\"highlight-0\" class=\"extra-bold\">cancer</span>.'
+  expect(received).toBe(expected)
+})
+
+test('TITLE:"blood in"', () => {
+  const query = 'TITLE:"blood in"'
+  const content = 'Strawberry milk-like blood in a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
+  const received = highlightByQuery(query, content, options)
+  const expected = 'Strawberry milk-like <span id=\"highlight-0\" class=\"extra-bold\">blood in</span> a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
+  expect(received).toBe(expected)
+})
