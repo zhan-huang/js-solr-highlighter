@@ -1,0 +1,86 @@
+{
+  "name": "js-solr-highlighter",
+  "version": "0.6.0",
+  "description": "A JavaScript library for highlighting HTML text based on the query in the lucene/solr query syntax",
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint index.js --fix",
+    "lint:nofix": "./node_modules/.bin/eslint index.js --max-warnings 0",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhan-huang/js-solr-highlighter.git"
+  },
+  "dependencies": {
+    "lucene": "^2.1.1",
+    "text-annotator": "^0.6.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "eslint": "^5.15.3",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-jest": "^22.4.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.5.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "1.18.2"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:jest/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "prettier"
+    ]
+  },
+  "pre-commit": [
+    "lint:nofix",
+    "test"
+  ],
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "keywords": [
+    "Lucene",
+    "Query",
+    "Highlighter",
+    "JavaScript"
+  ],
+  "author": "Zhan Huang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhan-huang/js-solr-highlighter/issues"
+  },
+  "homepage": "https://github.com/zhan-huang/js-solr-highlighter#readme"
+}
