@@ -141,11 +141,7 @@ export default function highlightByQuery(query, content, options = {}) {
       if (start !== 'NOT') {
         if (highlightedFields.includes(left.field)) {
           words = addTerm(words, left.term, left.quoted)
-        } else if (
-          (!left.right || !highlightedFields.includes(left.right.field)) &&
-          left.left &&
-          highlightedFields.includes(left.left.field)
-        ) {
+        } else if (left.left && highlightedFields.includes(left.left.field)) {
           words = addTerm(words, left.left.term, left.left.quoted)
         }
       }
