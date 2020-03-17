@@ -2,8 +2,9 @@
   "name": "js-solr-highlighter",
   "version": "0.6.0",
   "description": "A JavaScript library for highlighting HTML text based on the query in the lucene/solr query syntax",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
+    "build": "babel index.js -d build",
     "lint": "./node_modules/.bin/eslint index.js --fix",
     "lint:nofix": "./node_modules/.bin/eslint index.js --max-warnings 0",
     "test": "jest"
@@ -17,6 +18,7 @@
     "text-annotator": "^0.6.5"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "babel-jest": "^24.7.1",
