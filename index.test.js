@@ -409,3 +409,11 @@ test('(cancer NOT blood)', () => {
   const expected = 'Supramolecular self-assembly of a hybrid \'hyalurosome\' for targeted photothermal therapy in non-small cell lung <span id=\"highlight-0\" class=\"extra-bold\">cancer</span>.'
   expect(received).toBe(expected)
 })
+
+test('TITLE:"blood in"', () => {
+  const query = 'TITLE:"blood in"'
+  const content = 'Strawberry milk-like blood in a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
+  const received = highlightByQuery(query, content, options)
+  const expected = 'Strawberry milk-like <span id=\"highlight-0\" class=\"extra-bold\">blood in</span> a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
+  expect(received).toBe(expected)
+})
