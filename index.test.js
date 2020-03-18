@@ -1,4 +1,4 @@
-import highlightByQuery from './'
+import { highlightByQuery } from './index.js'
 
 const options = {
   excludedFields: [

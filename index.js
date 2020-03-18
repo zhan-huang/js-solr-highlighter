@@ -38,7 +38,11 @@ const STOP_WORDS = [
   'with'
 ]
 
-export default function highlightByQuery(query, content, options = {}) {
+function hasNonStopWords(string) {
+  return STOP_WORDS.includes(string)
+}
+
+function highlightByQuery(query, content, options = {}) {
   const excludedFields =
     options.excludedFields === undefined ? [] : options.excludedFields
 
@@ -164,7 +168,7 @@ export default function highlightByQuery(query, content, options = {}) {
   words = words.filter(
     word =>
       word.length &&
-      !STOP_WORDS.includes(word.toLowerCase()) &&
+      !hasNonStopWords(word.toLowerCase()) &&
       !['AND', 'OR', 'NOT'].includes(word)
   )
   let newContent = content
@@ -204,3 +208,5 @@ export default function highlightByQuery(query, content, options = {}) {
   }
   return newContent
 }
+
+export { STOP_WORDS, hasNonStopWords, highlightByQuery }
