@@ -3,13 +3,20 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = highlightByQuery;
+exports.hasNonStopWords = hasNonStopWords;
+exports.highlightByQuery = highlightByQuery;
+exports.STOP_WORDS = void 0;
 
 var _textAnnotator = _interopRequireDefault(require("text-annotator"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const STOP_WORDS = ['a', 'an', 'and', 'are', 'as', 'at', 'be', 'but', 'by', 'for', 'if', 'in', 'into', 'is', 'it', 'no', 'not', 'of', 'on', 'or', 's', 'such', 't', 'that', 'the', 'their', 'then', 'there', 'these', 'they', 'this', 'to', 'was', 'will', 'with'];
+exports.STOP_WORDS = STOP_WORDS;
+
+function hasNonStopWords(string) {
+  return STOP_WORDS.includes(string);
+}
 
 function highlightByQuery(query, content, options = {}) {
   const excludedFields = options.excludedFields === undefined ? [] : options.excludedFields;
@@ -118,7 +125,7 @@ function highlightByQuery(query, content, options = {}) {
   // some filters may be moved above
 
 
-  words = words.filter(word => word.length && !STOP_WORDS.includes(word.toLowerCase()) && !['AND', 'OR', 'NOT'].includes(word));
+  words = words.filter(word => word.length && !hasNonStopWords(word.toLowerCase()) && !['AND', 'OR', 'NOT'].includes(word));
   let newContent = content;
 
   if (words.length) {
