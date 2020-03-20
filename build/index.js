@@ -20,10 +20,11 @@ function hasNonStopWords(string) {
 // highlightedFields are those among validFields whose values will be highlighted. If undefined, the values of all valid fields will be highlighted
 
 
-function highlightByQuery(query, content, {
-  validFields,
-  highlightedFields
-}) {
+function highlightByQuery(query, content, options = {}) {
+  const {
+    validFields,
+    highlightedFields
+  } = options;
   let words = [];
 
   const lucene = require('lucene'); // possible: [\+\-\!\(\)\{\}\[\]\^\"\?\:\\\&\|\'\/\s\*\~]
