@@ -1,5 +1,6 @@
 import { highlightByQuery } from './index.js'
 
+// test with options
 const options = {
   validFields: [
     'ABBR',

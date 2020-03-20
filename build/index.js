@@ -105,10 +105,10 @@ function highlightByQuery(query, content, {
   } else {
     const allParentheses = astString.match(/"parenthesized":true/g);
 
-    const canHighlight = field => highlightedFields === undefined || highlightedFields.includes(field); // not an elegant solution
+    const canHighlight = field => highlightedFields === undefined ? field : highlightedFields.includes(field); // not an elegant solution
 
 
-    if ((highlightedFields === undefined || !canHighlight) && operator === '<implicit>' && right && right.field === '<implicit>' && !allParentheses) {
+    if (!canHighlight(left.field) && operator === '<implicit>' && right && right.field === '<implicit>' && !allParentheses) {
       words = addTerm(words, q, true);
     } else {
       if (start !== 'NOT') {

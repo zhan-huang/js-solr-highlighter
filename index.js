@@ -44,7 +44,9 @@ function hasNonStopWords(string) {
 
 // validFields are those parsed as fields. If undefined, all will be parsed as fields if they are like x:x
 // highlightedFields are those among validFields whose values will be highlighted. If undefined, the values of all valid fields will be highlighted
-function highlightByQuery(query, content, { validFields, highlightedFields }) {
+function highlightByQuery(query, content, options = {}) {
+  const { validFields, highlightedFields } = options
+
   let words = []
 
   const lucene = require('lucene')
@@ -131,11 +133,13 @@ function highlightByQuery(query, content, { validFields, highlightedFields }) {
   } else {
     const allParentheses = astString.match(/"parenthesized":true/g)
     const canHighlight = field =>
-      highlightedFields === undefined || highlightedFields.includes(field)
+      highlightedFields === undefined
+        ? field
+        : highlightedFields.includes(field)
 
     // not an elegant solution
     if (
-      (highlightedFields === undefined || !canHighlight) &&
+      !canHighlight(left.field) &&
       operator === '<implicit>' &&
       right &&
       right.field === '<implicit>' &&
