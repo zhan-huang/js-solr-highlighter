@@ -419,3 +419,19 @@ test('TITLE:"blood in"', () => {
   const expected = 'Strawberry milk-like <span id=\"highlight-0\" class=\"extra-bold\">blood in</span> a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
   expect(received).toBe(expected)
 })
+
+// test('TITLE:blood AND CONTENT:cell', () => {
+//   const query = 'TITLE:blood AND CONTENT:cell'
+//   const content = 'A molecular map of lymph node blood vascular endothelium at single cell resolution'
+//   const received = highlightByQuery(query, content, { validFields: ['TITLE'] })
+//   const expected = 'A molecular map of lymph node <span id=\"highlight-0\" class=\"extra-bold\">blood</span> vascular endothelium at single cell resolution'
+//   expect(received).toBe(expected)
+// })
+
+test('TITLE:blood OR CONTENT:cell', () => {
+  const query = 'TITLE:blood OR CONTENT:cell'
+  const content = 'A molecular map of lymph node blood vascular endothelium at single cell resolution'
+  const received = highlightByQuery(query, content, { validFields: ['TITLE', 'CONTENT'], highlightedFields: ['CONTENT'] })
+  const expected = 'A molecular map of lymph node blood vascular endothelium at single <span id="highlight-0" class="extra-bold">cell</span> resolution'
+  expect(received).toBe(expected)
+})
