@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "babel index.js -d build",
-    "lint": "./node_modules/.bin/eslint index.js --fix",
+    "lint": "./node_modules/.bin/eslint index.js index.test.js --fix",
     "lint:nofix": "./node_modules/.bin/eslint index.js --max-warnings 0",
     "test": "jest"
   },
