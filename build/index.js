@@ -16,10 +16,14 @@ exports.STOP_WORDS = STOP_WORDS;
 
 function hasNonStopWords(string) {
   return STOP_WORDS.includes(string);
-}
+} // validFields are those parsed as fields. If undefined, all will be parsed as fields if they are like x:x
+// highlightedFields are those among validFields whose values will be highlighted. If undefined, the values of all valid fields will be highlighted
 
-function highlightByQuery(query, content, options = {}) {
-  const excludedFields = options.excludedFields === undefined ? [] : options.excludedFields;
+
+function highlightByQuery(query, content, {
+  validFields,
+  highlightedFields
+}) {
   let words = [];
 
   const lucene = require('lucene'); // possible: [\+\-\!\(\)\{\}\[\]\^\"\?\:\\\&\|\'\/\s\*\~]
@@ -51,7 +55,7 @@ function highlightByQuery(query, content, options = {}) {
     const field = res[1].replace(/\(|\)/g, '');
     const fieldVal = res[1] + ':' + res[2];
 
-    if (excludedFields.includes(field)) {
+    if (validFields === undefined || validFields.includes(field)) {
       // remove invalid "
       if (res[2].startsWith('"') && !res[2].endsWith('"')) {
         fieldVals.push([fieldVal, res[1] + ':' + res[2].substring(1)]);
@@ -99,24 +103,26 @@ function highlightByQuery(query, content, options = {}) {
   if (allOperators && allOperators.every(operator => operator === '"operator":"<implicit>"') && allFields && allFields.every(field => field === '"field":"<implicit>"') && !left.quoted) {
     words = addTerm(words, q, false);
   } else {
-    const highlightedFields = ['TITLE', '<implicit>'];
-    const allParentheses = astString.match(/"parenthesized":true/g); // not an elegant solution
+    const allParentheses = astString.match(/"parenthesized":true/g);
 
-    if (!highlightedFields.includes(left.field) && operator === '<implicit>' && right && right.field === '<implicit>' && !allParentheses) {
+    const canHighlight = field => highlightedFields === undefined || highlightedFields.includes(field); // not an elegant solution
+
+
+    if ((highlightedFields === undefined || !canHighlight) && operator === '<implicit>' && right && right.field === '<implicit>' && !allParentheses) {
       words = addTerm(words, q, true);
     } else {
       if (start !== 'NOT') {
-        if (highlightedFields.includes(left.field)) {
+        if (canHighlight(left.field)) {
           words = addTerm(words, left.term, left.quoted);
-        } else if (left.left && highlightedFields.includes(left.left.field)) {
+        } else if (left.left && canHighlight(left.left.field)) {
           words = addTerm(words, left.left.term, left.left.quoted);
         }
       }
 
       if (operator !== 'NOT' && right) {
-        if (highlightedFields.includes(right.field)) {
+        if (canHighlight(right.field)) {
           words = addTerm(words, right.term, right.quoted);
-        } else if ((!right.right || !highlightedFields.includes(right.right.field)) && right.left && highlightedFields.includes(right.left.field)) {
+        } else if ((!right.right || !canHighlight(right.right.field)) && right.left && canHighlight(right.left.field)) {
           words = addTerm(words, right.left.term, right.left.quoted);
         }
       }

@@ -1,7 +1,7 @@
 import { highlightByQuery } from './index.js'
 
 const options = {
-  excludedFields: [
+  validFields: [
     'ABBR',
     'ABSTRACT',
     'ACCESSION_ID',
@@ -150,7 +150,8 @@ const options = {
     '_version_',
     'text_hl',
     'text_synonyms'
-  ]
+  ],
+  highlightedFields: ['TITLE', '<implicit>']
 }
 
 test('methylation test', () => {
