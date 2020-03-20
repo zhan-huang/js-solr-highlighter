@@ -1,6 +1,6 @@
 {
   "name": "js-solr-highlighter",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "A JavaScript library for highlighting HTML text based on the query in the lucene/solr query syntax",
   "main": "build/index.js",
   "scripts": {
