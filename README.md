@@ -6,7 +6,7 @@ The general highlighting process is:
 2. Highlight the derived text in the HTML
 
 ## An example from [Europe PMC](https://europepmc.org "Europe PMC")
-http://europepmc.orgsearch?query=blood%20AND%20TITLE%3Acancer
+https://europepmc.org/search?query=blood%20AND%20TITLE%3Acancer
 !["an example from Europe PMC" "an example from Europe PMC"](example.JPG)
 
 ## Basic usage
