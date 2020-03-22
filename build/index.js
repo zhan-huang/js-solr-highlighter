@@ -45,16 +45,37 @@ function highlightByQuery(query, content, options = {}) {
   }; // escape invalid fields and char
 
 
-  let q = query; // possible: /([^:\s]+):([^:\s]+)/g
-
-  const regex = /([^(][^:\s]+):([^:][^)]+)/g;
-  let res;
+  let q = query;
   const fieldVals = [];
-  const fieldVals2 = [];
+  const fieldVals2 = []; // possible: /([^:\s]+):([^:\s]+)/g
+  // xxx:xxx, xxx: xxx
+
+  let regex = /([^(\s]+):\s?([^\s)"]+)/g;
+  let res;
 
   while ((res = regex.exec(q)) !== null) {
-    const field = res[1].replace(/\(|\)/g, '');
-    const fieldVal = res[1] + ':' + res[2];
+    const field = res[1];
+    const fieldVal = res[0];
+
+    if (validFields === undefined || validFields.includes(field)) {
+      // remove invalid "
+      if (res[2].startsWith('"') && !res[2].endsWith('"')) {
+        fieldVals.push([fieldVal, res[1] + ':' + res[2].substring(1)]);
+      } else if (!res[2].startsWith('"') && res[2].endsWith('"')) {
+        fieldVals.push(fieldVal, res[1] + ':' + res[2].substring(0, res[2].length - 1));
+      }
+    } else {
+      fieldVals2.push(fieldVal);
+    }
+  } // possible: , /([a-zA-Z]+)(\s+):(\s+)([a-zA-Z]+)/g
+  // xxx:"xxx" xxx:"xxx
+
+
+  const regex2 = /([^\s(]+):\s?("[^"]+"?[^)])/g;
+
+  while ((res = regex2.exec(q)) !== null) {
+    const field = res[1];
+    const fieldVal = res[0];
 
     if (validFields === undefined || validFields.includes(field)) {
       // remove invalid "
