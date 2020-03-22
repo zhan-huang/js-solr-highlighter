@@ -1,5 +1,6 @@
 # js-solr-highlighter
 A JavaScript library for highlighting HTML text based on the query in the lucene/solr query syntax
+Run in the browser or Node.js environment 
 Built based on [lucene](https://github.com/bripkens/lucene "lucene") and [text-annotator](https://github.com/zhan-huang/text-annotator "text-annotator")
 The general highlighting process is:
 1. Derive which text to highlight from a query in the lucene syntax
