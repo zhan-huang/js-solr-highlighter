@@ -41,4 +41,4 @@ var highlightedContent = highlightByQuery(query, content, options)
 ## Highlighting rules
 
 ## Contact
-[Zhan Huang](z2hm@outlook.com "Zhan Huang")
+[Zhan Huang](mailto:z2hm@outlook.com "Zhan Huang")
