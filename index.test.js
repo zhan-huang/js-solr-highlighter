@@ -472,6 +472,16 @@ test('(cancer NOT blood)', () => {
   expect(received).toBe(expected)
 })
 
+test('(cancer OR blood)', () => {
+  const query = '(cancer OR blood)'
+  const content =
+    "Parents' perspectives on dried blood spot self-sampling from children with epilepsy: A mixed method study."
+  const received = highlightByQuery(query, content, options)
+  const expected =
+    'Parents\' perspectives on dried <span id="highlight-0" class="extra-bold">blood</span> spot self-sampling from children with epilepsy: A mixed method study.'
+  expect(received).toBe(expected)
+})
+
 test('TITLE:"blood in"', () => {
   const query = 'TITLE:"blood in"'
   const content =
@@ -481,7 +491,7 @@ test('TITLE:"blood in"', () => {
     'Strawberry milk-like <span id="highlight-0" class="extra-bold">blood in</span> a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
   expect(received).toBe(expected)
 })
-
+//
 test('TITLE:blood AND CONTENT:cell', () => {
   const query = 'TITLE:blood AND CONTENT:cell'
   const content =

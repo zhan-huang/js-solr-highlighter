@@ -140,8 +140,14 @@ function highlightByQuery(query, content, options = {}) {
       if (start !== 'NOT') {
         if (canHighlight(left.field)) {
           words = addTerm(words, left.term, left.quoted);
-        } else if (left.left && canHighlight(left.left.field)) {
-          words = addTerm(words, left.left.term, left.left.quoted);
+        } else {
+          if (left.left && canHighlight(left.left.field)) {
+            words = addTerm(words, left.left.term, left.left.quoted);
+          }
+
+          if (left.operator !== 'NOT' && left.right && canHighlight(left.right.field)) {
+            words = addTerm(words, left.right.term, left.right.quoted);
+          }
         }
       }
 
