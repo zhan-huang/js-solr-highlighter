@@ -5,6 +5,10 @@ The general highlighting process is:
 1. Derive which text to highlight from a query in the lucene syntax
 2. Highlight the derived text in the HTML
 
+## An example from [Europe PMC](https://europepmc.org "Europe PMC")
+http://europepmc.orgsearch?query=blood%20AND%20TITLE%3Acancer
+!["an example from Europe PMC" "an example from Europe PMC"](example.JPG)
+
 ## Basic usage
 ### No options
 ```javascript
@@ -31,6 +35,7 @@ var highlightedContent = highlightByQuery(query, content, options)
 // 'A molecular map of lymph node blood vascular endothelium at single <span id="highlight-0" class="extra-bold">cell</span> resolution'
 // "blood" will not be highlighted
 ```
+
 ## Options
 
 ## Highlighting rules
