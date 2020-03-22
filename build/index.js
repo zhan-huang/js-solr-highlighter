@@ -127,6 +127,10 @@ function highlightByQuery(query, content, options = {}) {
   } else {
     const allParentheses = astString.match(/"parenthesized":true/g);
 
+    if (highlightedFields !== undefined && !highlightedFields.includes('<implicit>')) {
+      highlightedFields.push('<implicit>');
+    }
+
     const canHighlight = field => highlightedFields === undefined ? field : highlightedFields.includes(field); // not an elegant solution
 
 

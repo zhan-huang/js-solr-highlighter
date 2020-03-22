@@ -504,3 +504,15 @@ test('TITLE:blood OR CONTENT:cell', () => {
     'A molecular map of lymph node blood vascular endothelium at single <span id="highlight-0" class="extra-bold">cell</span> resolution'
   expect(received).toBe(expected)
 })
+
+test('TITLE:blood OR cell', () => {
+  const query = 'TITLE:blood OR cell'
+  const content =
+    'A molecular map of lymph node blood vascular endothelium at single cell resolution'
+  const received = highlightByQuery(query, content, {
+    validFields: ['TITLE']
+  })
+  const expected =
+    'A molecular map of lymph node <span id="highlight-0" class="extra-bold">blood</span> vascular endothelium at single <span id="highlight-1" class="extra-bold">cell</span> resolution'
+  expect(received).toBe(expected)
+})
