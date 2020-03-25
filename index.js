@@ -38,8 +38,8 @@ const STOP_WORDS = [
   'with'
 ]
 
-function hasNonStopWords(string) {
-  return STOP_WORDS.includes(string)
+function isStopWord(string) {
+  return STOP_WORDS.includes(string.toLowerCase())
 }
 
 // validFields are those parsed as fields. If undefined, all will be parsed as fields if they are like x:x
@@ -209,9 +209,7 @@ function highlightByQuery(query, content, options = {}) {
   // some filters may be moved above
   words = words.filter(
     word =>
-      word.length &&
-      !hasNonStopWords(word.toLowerCase()) &&
-      !['AND', 'OR', 'NOT'].includes(word)
+      word.length && !isStopWord(word) && !['AND', 'OR', 'NOT'].includes(word)
   )
   let newContent = content
   if (words.length) {
@@ -251,4 +249,4 @@ function highlightByQuery(query, content, options = {}) {
   return newContent
 }
 
-export { STOP_WORDS, hasNonStopWords, highlightByQuery }
+export { STOP_WORDS, isStopWord, highlightByQuery }
