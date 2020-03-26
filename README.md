@@ -1,7 +1,7 @@
 # js-solr-highlighter
-A JavaScript library for highlighting HTML text based on the query in the lucene/solr query syntax
-Run in the browser or Node.js environment 
-Built based on [lucene](https://github.com/bripkens/lucene "lucene") and [text-annotator](https://github.com/zhan-huang/text-annotator "text-annotator")
+A JavaScript library for highlighting HTML text based on the query in the lucene/solr query syntax<br />
+Run in the browser or Node.js environment<br />
+Built based on [lucene](https://github.com/bripkens/lucene "lucene") and [text-annotator](https://github.com/zhan-huang/text-annotator "text-annotator")<br />
 The general highlighting process is:
 1. Derive which text to highlight from a query in the lucene syntax
 2. Highlight the derived text in the HTML
@@ -18,7 +18,7 @@ var content = 'Platelet Volume Is Reduced In Metastasing Breast Cancer: Blood Pr
 var highlightedContent = highlightByQuery(query, content)
 // 'Platelet Volume Is Reduced In Metastasing Breast <span id="highlight-0" class="extra-bold">Cancer</span>: <span id="highlight-1" class="extra-bold">Blood</span> Profiles Reveal Significant Shifts.'
 ```
-### With the validFields options that specify the fields valid in the query syntax. If not specified, all like X:X will be valid fields
+### With the validFields options that specify the fields valid in the query syntax. If not specified, all like x:x will be valid fields
 ```javascript
 var query = 'TITLE:blood AND CONTENT:cell'
 var content = 'A molecular map of lymph node blood vascular endothelium at single cell resolution'
@@ -38,8 +38,14 @@ var highlightedContent = highlightByQuery(query, content, options)
 ```
 
 ## Options
+| Field       | Type | Description |
+| ---- | ---- | ---- |
+| validFields | array | validFields are those parsed as fields. If undefined, all will be parsed as fields if they are like x:x |
+| highlightedFields | array | highlightedFields are those among validFields whose values will be highlighted. If undefined, the values of all valid fields will be highlighted |
+| highlightAll | boolean | highlightAll indicates whether to highlight all occurances of the text or the first found occurance only. Default is true |
 
 ## Highlighting rules
+TBA
 
 ## Contact
 [Zhan Huang](mailto:z2hm@outlook.com "Zhan Huang")

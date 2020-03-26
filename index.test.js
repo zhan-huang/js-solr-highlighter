@@ -530,6 +530,18 @@ describe('other tests for function highlightByQuery', () => {
       'A molecular map of lymph node <span id="highlight-0" class="extra-bold">blood</span> vascular endothelium at single <span id="highlight-1" class="extra-bold">cell</span> resolution'
     expect(received).toBe(expected)
   })
+
+  test('blood', () => {
+    const query = 'blood'
+    const content =
+      "Pediatric non-red cell blood product transfusion practices: what's the evidence to guide transfusion of the 'yellow' blood products?"
+    const received = highlightByQuery(query, content, {
+      highlightAll: false
+    })
+    const expected =
+      'Pediatric non-red cell <span id="highlight-0" class="extra-bold">blood</span> product transfusion practices: what\'s the evidence to guide transfusion of the \'yellow\' blood products?'
+    expect(received).toBe(expected)
+  })
 })
 
 describe('tests for function isStopWord', () => {

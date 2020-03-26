@@ -45,7 +45,9 @@ function isStopWord(string) {
 // validFields are those parsed as fields. If undefined, all will be parsed as fields if they are like x:x
 // highlightedFields are those among validFields whose values will be highlighted. If undefined, the values of all valid fields will be highlighted
 function highlightByQuery(query, content, options = {}) {
-  const { validFields, highlightedFields } = options
+  const { validFields, highlightAll, highlightedFields } = options
+  const searchFunc =
+    highlightAll === undefined || highlightAll ? 'searchAll' : 'search'
 
   let words = []
 
@@ -217,12 +219,13 @@ function highlightByQuery(query, content, options = {}) {
       content
     })
     words.forEach(word => {
-      const highlightIndexes = highlighter.searchAll(word, {
+      let res = highlighter[searchFunc](word, {
         directSearchOptions: {
           caseSensitive: false
         }
       })
-      highlightIndexes.forEach(highlightIndex => {
+      res = searchFunc === 'search' ? [res] : res
+      res.forEach(highlightIndex => {
         const loc = highlighter.highlights[highlightIndex].loc
         const text = highlighter.stripedHTML
 
@@ -230,7 +233,7 @@ function highlightByQuery(query, content, options = {}) {
           const letters = /^[0-9a-zA-Z]+$/
           return !c.match(letters)
         }
-        // make sure we do not highlight part of a word
+        // make sure we do not highlight part of a word; can be moved up
         const prevCharValid = loc[0] === 0 || fixVaild(text.charAt(loc[0] - 1))
         const nextCharValid =
           loc[1] === text.length - 1 || fixVaild(text.charAt(loc[1]))
