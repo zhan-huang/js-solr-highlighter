@@ -45,7 +45,13 @@ function isStopWord(string) {
 // validFields are those parsed as fields. If undefined, all will be parsed as fields if they are like x:x
 // highlightedFields are those among validFields whose values will be highlighted. If undefined, the values of all valid fields will be highlighted
 function highlightByQuery(query, content, options = {}) {
-  const { validFields, highlightAll, highlightedFields } = options
+  const {
+    validFields,
+    highlightAll,
+    highlightClass,
+    highlightedFields,
+    highlightIdPattern
+  } = options
   const searchFunc =
     highlightAll === undefined || highlightAll ? 'searchAll' : 'search'
 
@@ -242,8 +248,8 @@ function highlightByQuery(query, content, options = {}) {
           newContent = highlighter.highlight(highlightIndex, {
             content: newContent,
             returnContent: true,
-            color: 'transparent',
-            highlightClass: 'extra-bold'
+            highlightIdPattern,
+            highlightClass
           })
         }
       })

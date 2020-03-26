@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.hasNonStopWords = hasNonStopWords;
+exports.isStopWord = isStopWord;
 exports.highlightByQuery = highlightByQuery;
 exports.STOP_WORDS = void 0;
 
@@ -14,8 +14,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const STOP_WORDS = ['a', 'an', 'and', 'are', 'as', 'at', 'be', 'but', 'by', 'for', 'if', 'in', 'into', 'is', 'it', 'no', 'not', 'of', 'on', 'or', 's', 'such', 't', 'that', 'the', 'their', 'then', 'there', 'these', 'they', 'this', 'to', 'was', 'will', 'with'];
 exports.STOP_WORDS = STOP_WORDS;
 
-function hasNonStopWords(string) {
-  return STOP_WORDS.includes(string);
+function isStopWord(string) {
+  return STOP_WORDS.includes(string.toLowerCase());
 } // validFields are those parsed as fields. If undefined, all will be parsed as fields if they are like x:x
 // highlightedFields are those among validFields whose values will be highlighted. If undefined, the values of all valid fields will be highlighted
 
@@ -23,8 +23,12 @@ function hasNonStopWords(string) {
 function highlightByQuery(query, content, options = {}) {
   const {
     validFields,
-    highlightedFields
+    highlightAll,
+    highlightClass,
+    highlightedFields,
+    highlightIdPattern
   } = options;
+  const searchFunc = highlightAll === undefined || highlightAll ? 'searchAll' : 'search';
   let words = [];
 
   const lucene = require('lucene'); // possible: [\+\-\!\(\)\{\}\[\]\^\"\?\:\\\&\|\'\/\s\*\~]
@@ -163,7 +167,7 @@ function highlightByQuery(query, content, options = {}) {
   // some filters may be moved above
 
 
-  words = words.filter(word => word.length && !hasNonStopWords(word.toLowerCase()) && !['AND', 'OR', 'NOT'].includes(word));
+  words = words.filter(word => word.length && !isStopWord(word) && !['AND', 'OR', 'NOT'].includes(word));
   let newContent = content;
 
   if (words.length) {
@@ -171,19 +175,20 @@ function highlightByQuery(query, content, options = {}) {
       content
     });
     words.forEach(word => {
-      const highlightIndexes = highlighter.searchAll(word, {
+      let res = highlighter[searchFunc](word, {
         directSearchOptions: {
           caseSensitive: false
         }
       });
-      highlightIndexes.forEach(highlightIndex => {
+      res = searchFunc === 'search' ? [res] : res;
+      res.forEach(highlightIndex => {
         const loc = highlighter.highlights[highlightIndex].loc;
         const text = highlighter.stripedHTML;
 
         const fixVaild = c => {
           const letters = /^[0-9a-zA-Z]+$/;
           return !c.match(letters);
-        }; // make sure we do not highlight part of a word
+        }; // make sure we do not highlight part of a word; can be moved up
 
 
         const prevCharValid = loc[0] === 0 || fixVaild(text.charAt(loc[0] - 1));
@@ -194,8 +199,8 @@ function highlightByQuery(query, content, options = {}) {
           newContent = highlighter.highlight(highlightIndex, {
             content: newContent,
             returnContent: true,
-            color: 'transparent',
-            highlightClass: 'extra-bold'
+            highlightIdPattern,
+            highlightClass
           });
         }
       });

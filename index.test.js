@@ -161,7 +161,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'epiCaPture: A Urine DNA Methylation Test for Early Detection of Aggressive Prostate Cancer.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'epiCaPture: A Urine DNA <span id="highlight-0" class="extra-bold">Methylation</span> <span id="highlight-1" class="extra-bold">Test</span> for Early Detection of Aggressive Prostate Cancer.'
+      'epiCaPture: A Urine DNA <span id="highlight-0" class="highlight">Methylation</span> <span id="highlight-1" class="highlight">Test</span> for Early Detection of Aggressive Prostate Cancer.'
     expect(received).toBe(expected)
   })
 
@@ -171,7 +171,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'A molecular map of lymph node blood vascular endothelium at single cell resolution'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'A molecular map of lymph node <span id="highlight-0" class="extra-bold">blood</span> vascular endothelium at single cell resolution'
+      'A molecular map of lymph node <span id="highlight-0" class="highlight">blood</span> vascular endothelium at single cell resolution'
     expect(received).toBe(expected)
   })
 
@@ -181,7 +181,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Towards emerging EEG applications: a novel printable flexible Ag/AgCl dry electrode array for robust recording of EEG signals at forehead sites.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Towards emerging EEG applications: a novel printable flexible Ag/AgCl dry <span id="highlight-0" class="extra-bold">electrode array</span> for robust recording of EEG signals at forehead sites.'
+      'Towards emerging EEG applications: a novel printable flexible Ag/AgCl dry <span id="highlight-0" class="highlight">electrode array</span> for robust recording of EEG signals at forehead sites.'
     expect(received).toBe(expected)
   })
 
@@ -211,7 +211,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Autophagy-mediated occludin degradation contributes to blood-brain barrier disruption during ischemia in bEnd.3 brain endothelial cells and rat ischemic stroke models.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Autophagy-mediated occludin degradation contributes to <span id="highlight-0" class="extra-bold">blood</span>-<span id="highlight-1" class="extra-bold">brain</span> barrier disruption during ischemia in bEnd.3 <span id="highlight-2" class="extra-bold">brain</span> endothelial cells and rat ischemic stroke models.'
+      'Autophagy-mediated occludin degradation contributes to <span id="highlight-0" class="highlight">blood</span>-<span id="highlight-1" class="highlight">brain</span> barrier disruption during ischemia in bEnd.3 <span id="highlight-2" class="highlight">brain</span> endothelial cells and rat ischemic stroke models.'
     expect(received).toBe(expected)
   })
 
@@ -229,7 +229,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Platelet Volume Is Reduced In Metastasing Breast Cancer: Blood Profiles Reveal Significant Shifts.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Platelet Volume Is Reduced In Metastasing Breast <span id="highlight-0" class="extra-bold">Cancer</span>: <span id="highlight-1" class="extra-bold">Blood</span> Profiles Reveal Significant Shifts.'
+      'Platelet Volume Is Reduced In Metastasing Breast <span id="highlight-0" class="highlight">Cancer</span>: <span id="highlight-1" class="highlight">Blood</span> Profiles Reveal Significant Shifts.'
     expect(received).toBe(expected)
   })
 
@@ -238,7 +238,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
     const content = 'New cancer blood test developed.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'New <span id="highlight-0" class="extra-bold">cancer</span> <span id="highlight-1" class="extra-bold">blood</span> test developed.'
+      'New <span id="highlight-0" class="highlight">cancer</span> <span id="highlight-1" class="highlight">blood</span> test developed.'
     expect(received).toBe(expected)
   })
 
@@ -248,7 +248,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Efficacy of kinesio taping in early stage breast cancer associated lymphedema: A randomized single blinded study.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Efficacy of kinesio taping in early stage breast <span id="highlight-0" class="extra-bold">cancer</span> associated lymphedema: A randomized single blinded study.'
+      'Efficacy of kinesio taping in early stage breast <span id="highlight-0" class="highlight">cancer</span> associated lymphedema: A randomized single blinded study.'
     expect(received).toBe(expected)
   })
 
@@ -258,7 +258,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'A multicentre parallel-group randomised trial assessing multiparametric MRI characterisation and image-guided biopsy of prostate in men suspected of having prostate cancer: MULTIPROS study protocol.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'A multicentre parallel-group randomised trial assessing multiparametric MRI characterisation and image-guided <span id="highlight-0" class="extra-bold">biopsy</span> of prostate in men suspected of having prostate cancer: MULTIPROS study protocol.'
+      'A multicentre parallel-group randomised trial assessing multiparametric MRI characterisation and image-guided <span id="highlight-0" class="highlight">biopsy</span> of prostate in men suspected of having prostate cancer: MULTIPROS study protocol.'
     expect(received).toBe(expected)
   })
 
@@ -268,7 +268,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       '[Predictive values of routine blood test results for iron deficiency in children].'
     const received = highlightByQuery(query, content, options)
     const expected =
-      '[Predictive values of routine <span id="highlight-0" class="extra-bold">blood</span> <span id="highlight-1" class="extra-bold">test</span> results for iron deficiency in children].'
+      '[Predictive values of routine <span id="highlight-0" class="highlight">blood</span> <span id="highlight-1" class="highlight">test</span> results for iron deficiency in children].'
     expect(received).toBe(expected)
   })
 
@@ -289,7 +289,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Diabetes and Cancer: Cancer Should Be Screened in Routine Diabetes Assessment.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Diabetes and <span id="highlight-2" class="extra-bold"><span id="highlight-0" class="extra-bold">Cancer</span></span>: <span id="highlight-3" class="extra-bold"><span id="highlight-1" class="extra-bold">Cancer</span></span> Should Be Screened in Routine Diabetes Assessment.'
+      'Diabetes and <span id="highlight-2" class="highlight"><span id="highlight-0" class="highlight">Cancer</span></span>: <span id="highlight-3" class="highlight"><span id="highlight-1" class="highlight">Cancer</span></span> Should Be Screened in Routine Diabetes Assessment.'
     expect(received).toBe(expected)
   })
 
@@ -299,7 +299,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Genetic disruption of the Blood Brain Barrier leads to protective barrier formation at the Glia Limitans'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Genetic disruption of the <span id="highlight-0" class="extra-bold">Blood</span> Brain Barrier leads to protective barrier formation at the Glia Limitans'
+      'Genetic disruption of the <span id="highlight-0" class="highlight">Blood</span> Brain Barrier leads to protective barrier formation at the Glia Limitans'
     expect(received).toBe(expected)
   })
 
@@ -310,7 +310,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'The Campbell Paradigm as a Behavior-Predictive Reinterpretation of the Classical Tripartite Model of Attitudes.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'The Campbell Paradigm as a <span id="highlight-2" class="extra-bold">Behavior</span>-Predictive Reinterpretation of the Classical Tripartite Model of <span id="highlight-0" class="extra-bold">Attitudes</span>.'
+      'The Campbell Paradigm as a <span id="highlight-2" class="highlight">Behavior</span>-Predictive Reinterpretation of the Classical Tripartite Model of <span id="highlight-0" class="highlight">Attitudes</span>.'
     expect(received).toBe(expected)
   })
 
@@ -320,7 +320,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       "A theory-based study of doctors' intentions to engage in professional behaviours."
     const received = highlightByQuery(query, content, options)
     const expected =
-      'A <span id="highlight-0" class="extra-bold">theory-based</span> <span id="highlight-1" class="extra-bold">study</span> of <span id="highlight-2" class="extra-bold">doctors</span>\' intentions to engage in professional behaviours.'
+      'A <span id="highlight-0" class="highlight">theory-based</span> <span id="highlight-1" class="highlight">study</span> of <span id="highlight-2" class="highlight">doctors</span>\' intentions to engage in professional behaviours.'
     expect(received).toBe(expected)
   })
 
@@ -330,7 +330,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'High definition ultrasound imaging of the individual elements of the brachial plexus above the clavicle.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'High definition ultrasound imaging of the individual elements of the brachial plexus <span id="highlight-0" class="extra-bold">above</span> the clavicle.'
+      'High definition ultrasound imaging of the individual elements of the brachial plexus <span id="highlight-0" class="highlight">above</span> the clavicle.'
     expect(received).toBe(expected)
   })
 
@@ -357,7 +357,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Genetic disruption of the Blood Brain Barrier leads to protective barrier formation at the Glia Limitans'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Genetic disruption of the Blood <span id="highlight-0" class="extra-bold">Brain</span> <span id="highlight-1" class="extra-bold">Barrier</span> leads to protective <span id="highlight-2" class="extra-bold">barrier</span> formation at the Glia Limitans'
+      'Genetic disruption of the Blood <span id="highlight-0" class="highlight">Brain</span> <span id="highlight-1" class="highlight">Barrier</span> leads to protective <span id="highlight-2" class="highlight">barrier</span> formation at the Glia Limitans'
     expect(received).toBe(expected)
   })
 
@@ -368,7 +368,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Histone Methyltransferases as Therapeutic Targets for Kidney Diseases.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      '<span id="highlight-0" class="extra-bold">Histone</span> <span id="highlight-1" class="extra-bold">Methyltransferases</span> as Therapeutic Targets for Kidney Diseases.'
+      '<span id="highlight-0" class="highlight">Histone</span> <span id="highlight-1" class="highlight">Methyltransferases</span> as Therapeutic Targets for Kidney Diseases.'
     expect(received).toBe(expected)
   })
 
@@ -378,7 +378,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Continuous renal replacement therapy in patients with HIV/AIDS.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Continuous renal replacement therapy in patients with <span id="highlight-0" class="extra-bold">HIV/AIDS</span>.'
+      'Continuous renal replacement therapy in patients with <span id="highlight-0" class="highlight">HIV/AIDS</span>.'
     expect(received).toBe(expected)
   })
 
@@ -388,7 +388,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Blood pressure-related electrocardiographic findings in healthy young individuals.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      '<span id="highlight-0" class="extra-bold">Blood</span> <span id="highlight-1" class="extra-bold">pressure-related</span> electrocardiographic findings in healthy young individuals.'
+      '<span id="highlight-0" class="highlight">Blood</span> <span id="highlight-1" class="highlight">pressure-related</span> electrocardiographic findings in healthy young individuals.'
     expect(received).toBe(expected)
   })
 
@@ -398,7 +398,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Use of magnoflorine-phospholipid complex to permeate blood-brain barrier and treat depression in the CUMS animal model.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Use of magnoflorine-phospholipid <span id="highlight-0" class="extra-bold">complex</span> to permeate <span id="highlight-1" class="extra-bold">blood</span>-brain barrier and treat depression in the CUMS animal model.'
+      'Use of magnoflorine-phospholipid <span id="highlight-0" class="highlight">complex</span> to permeate <span id="highlight-1" class="highlight">blood</span>-brain barrier and treat depression in the CUMS animal model.'
     expect(received).toBe(expected)
   })
 
@@ -408,7 +408,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'A network Based method to predict cancer causal genes in GR Network.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'A network Based method to predict <span id="highlight-0" class="extra-bold">cancer</span> causal genes in GR Network.'
+      'A network Based method to predict <span id="highlight-0" class="highlight">cancer</span> causal genes in GR Network.'
     expect(received).toBe(expected)
   })
 
@@ -418,7 +418,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Management delays in patients with squamous cell cancer of neck node(s) and unknown primary site: a retrospective cohort study.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Management delays in patients with squamous cell <span id="highlight-0" class="extra-bold">cancer</span> of <span id="highlight-1" class="extra-bold">neck</span> node(s) and unknown primary site: a retrospective cohort study.'
+      'Management delays in patients with squamous cell <span id="highlight-0" class="highlight">cancer</span> of <span id="highlight-1" class="highlight">neck</span> node(s) and unknown primary site: a retrospective cohort study.'
     expect(received).toBe(expected)
   })
 
@@ -438,7 +438,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Antiobesity Effect of Garlic Extract Fermented by Lactobacillus plantarum BL2 in Diet-Induced Obese Mice.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Antiobesity Effect of Garlic Extract Fermented by Lactobacillus plantarum <span id="highlight-0" class="extra-bold">BL2</span> in Diet-Induced Obese Mice.'
+      'Antiobesity Effect of Garlic Extract Fermented by Lactobacillus plantarum <span id="highlight-0" class="highlight">BL2</span> in Diet-Induced Obese Mice.'
     expect(received).toBe(expected)
   })
 
@@ -448,7 +448,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Appraisal of Metal Imbalances in the Blood of Thyroid Cancer Patients in Comparison with Healthy Subjects.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Appraisal of Metal Imbalances in the <span id="highlight-0" class="extra-bold">Blood</span> of Thyroid <span id="highlight-1" class="extra-bold">Cancer</span> Patients in Comparison with Healthy Subjects.'
+      'Appraisal of Metal Imbalances in the <span id="highlight-0" class="highlight">Blood</span> of Thyroid <span id="highlight-1" class="highlight">Cancer</span> Patients in Comparison with Healthy Subjects.'
     expect(received).toBe(expected)
   })
 
@@ -458,7 +458,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'No viremia of pandemic (H1N1) 2009 was demonstrated in blood donors who had donated blood during the probable incubation period.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'No viremia of pandemic (H1N1) 2009 was demonstrated in <span id="highlight-0" class="extra-bold">blood</span> donors who <span id="highlight-2" class="extra-bold">had</span> donated <span id="highlight-1" class="extra-bold">blood</span> during the probable incubation period.'
+      'No viremia of pandemic (H1N1) 2009 was demonstrated in <span id="highlight-0" class="highlight">blood</span> donors who <span id="highlight-2" class="highlight">had</span> donated <span id="highlight-1" class="highlight">blood</span> during the probable incubation period.'
     expect(received).toBe(expected)
   })
 
@@ -468,7 +468,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       "Supramolecular self-assembly of a hybrid 'hyalurosome' for targeted photothermal therapy in non-small cell lung cancer."
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Supramolecular self-assembly of a hybrid \'hyalurosome\' for targeted photothermal therapy in non-small cell lung <span id="highlight-0" class="extra-bold">cancer</span>.'
+      'Supramolecular self-assembly of a hybrid \'hyalurosome\' for targeted photothermal therapy in non-small cell lung <span id="highlight-0" class="highlight">cancer</span>.'
     expect(received).toBe(expected)
   })
 
@@ -478,7 +478,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       "Parents' perspectives on dried blood spot self-sampling from children with epilepsy: A mixed method study."
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Parents\' perspectives on dried <span id="highlight-0" class="extra-bold">blood</span> spot self-sampling from children with epilepsy: A mixed method study.'
+      'Parents\' perspectives on dried <span id="highlight-0" class="highlight">blood</span> spot self-sampling from children with epilepsy: A mixed method study.'
     expect(received).toBe(expected)
   })
 
@@ -488,7 +488,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
       'Strawberry milk-like blood in a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
     const received = highlightByQuery(query, content, options)
     const expected =
-      'Strawberry milk-like <span id="highlight-0" class="extra-bold">blood in</span> a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
+      'Strawberry milk-like <span id="highlight-0" class="highlight">blood in</span> a subject with diabetic lipemia: dramatic change to transparent color after insulin therapy.'
     expect(received).toBe(expected)
   })
 })
@@ -502,7 +502,7 @@ describe('other tests for function highlightByQuery', () => {
       validFields: ['TITLE']
     })
     const expected =
-      'A molecular map of lymph node <span id="highlight-0" class="extra-bold">blood</span> vascular endothelium at single cell resolution'
+      'A molecular map of lymph node <span id="highlight-0" class="highlight">blood</span> vascular endothelium at single cell resolution'
     expect(received).toBe(expected)
   })
 
@@ -515,7 +515,7 @@ describe('other tests for function highlightByQuery', () => {
       highlightedFields: ['CONTENT']
     })
     const expected =
-      'A molecular map of lymph node blood vascular endothelium at single <span id="highlight-0" class="extra-bold">cell</span> resolution'
+      'A molecular map of lymph node blood vascular endothelium at single <span id="highlight-0" class="highlight">cell</span> resolution'
     expect(received).toBe(expected)
   })
 
@@ -527,7 +527,7 @@ describe('other tests for function highlightByQuery', () => {
       validFields: ['TITLE']
     })
     const expected =
-      'A molecular map of lymph node <span id="highlight-0" class="extra-bold">blood</span> vascular endothelium at single <span id="highlight-1" class="extra-bold">cell</span> resolution'
+      'A molecular map of lymph node <span id="highlight-0" class="highlight">blood</span> vascular endothelium at single <span id="highlight-1" class="highlight">cell</span> resolution'
     expect(received).toBe(expected)
   })
 
@@ -539,7 +539,7 @@ describe('other tests for function highlightByQuery', () => {
       highlightAll: false
     })
     const expected =
-      'Pediatric non-red cell <span id="highlight-0" class="extra-bold">blood</span> product transfusion practices: what\'s the evidence to guide transfusion of the \'yellow\' blood products?'
+      'Pediatric non-red cell <span id="highlight-0" class="highlight">blood</span> product transfusion practices: what\'s the evidence to guide transfusion of the \'yellow\' blood products?'
     expect(received).toBe(expected)
   })
 })
