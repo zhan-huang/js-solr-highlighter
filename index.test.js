@@ -534,12 +534,36 @@ describe('other tests for function highlightByQuery', () => {
   test('blood', () => {
     const query = 'blood'
     const content =
-      "Pediatric non-red cell blood product transfusion practices: what's the evidence to guide transfusion of the 'yellow' blood products?"
+      'Pediatric non-red cell blood product transfusion practices: what\'s the evidence to guide transfusion of the \'yellow\' blood products?'
     const received = highlightByQuery(query, content, {
       highlightAll: false
     })
     const expected =
       'Pediatric non-red cell <span id="highlight-0" class="highlight">blood</span> product transfusion practices: what\'s the evidence to guide transfusion of the \'yellow\' blood products?'
+    expect(received).toBe(expected)
+  })
+
+  test('breast cancer', () => {
+    const query = 'breast cancer'
+    const content =
+      'Editorial: The Role of Breast Cancer Stem Cells in Clinical Outcomes.'
+    const received = highlightByQuery(query, content, {
+      highlightIdPattern: 'new-highlight-'
+    })
+    const expected =
+      'Editorial: The Role of <span id=\"new-highlight-0\" class=\"highlight\">Breast</span> <span id=\"new-highlight-1\" class=\"highlight\">Cancer</span> Stem Cells in Clinical Outcomes.'
+    expect(received).toBe(expected)
+  })
+
+  test('breast cancer', () => {
+    const query = 'breast cancer'
+    const content =
+      'Editorial: The Role of Breast Cancer Stem Cells in Clinical Outcomes.'
+    const received = highlightByQuery(query, content, {
+      highlightClass: 'new-highlight'
+    })
+    const expected =
+      'Editorial: The Role of <span id=\"highlight-0\" class=\"new-highlight\">Breast</span> <span id=\"highlight-1\" class=\"new-highlight\">Cancer</span> Stem Cells in Clinical Outcomes.'
     expect(received).toBe(expected)
   })
 })
