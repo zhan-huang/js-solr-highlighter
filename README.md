@@ -6,8 +6,8 @@ The general highlighting process is:
 1. Derive which text to highlight from a query in the lucene syntax
 2. Highlight the derived text in the HTML
 
-## An example from [Europe PMC](https://europepmc.org "Europe PMC")
-js-solr-highlighter has been used to highlight the article titles in the search results of Europe PMC. An example is https://europepmc.org/search?query=blood%20AND%20TITLE%3Acancer
+## An example from Europe PMC
+js-solr-highlighter has been used to highlight the article titles in the search results of [Europe PMC](https://europepmc.org "Europe PMC"). An example is https://europepmc.org/search?query=blood%20AND%20TITLE%3Acancer
 !["an example from Europe PMC" "an example from Europe PMC"](example.JPG)
 
 ## Basic usage
