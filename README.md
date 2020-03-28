@@ -45,6 +45,7 @@ var highlightedContent = highlightByQuery(query, content, options)
 | highlightAll | boolean | highlightAll indicates whether to highlight all occurances of the text or the first found occurance only.<br />If undefined, it is true. |
 | highlightIdPattern | string | highlightIdPattern is the same pattern of the IDs associated with the highlights in the HTML.<br />A highlight ID consists of highlightIdPattern followed by the index of the highlight, such as "highlight-0", "highlight-1"...<br />If undefined, it is "highlight-". |
 | highlightClass | string | highlightClass is the classname of every highlight in the HTML.<br />If undefined, it is "highlight". |
+| caseSensitive | boolean | caseSensitive indicates whether to ignore case when highlighting.<br />If undefined, it is false (ignore).
 
 ## Highlighting rules
 

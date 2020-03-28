@@ -1,6 +1,6 @@
 import { isStopWord, highlightByQuery } from './index.js'
 
-describe('tests for function highlightByQuery derived by faults found in Europe PMC', () => {
+describe("tests with Europe PMC's standard query set", () => {
   const options = {
     validFields: [
       'ABBR',
@@ -334,7 +334,7 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
     expect(received).toBe(expected)
   })
 
-  // throw errors but work; improve later
+  // throw errors but work; improve later***
   // test('PUBLISHER:"[Institute for Quality and Efficiency in Health Care (IQWiG)][Cologne (Germany)]"', () => {
   //   const query = 'PUBLISHER:"[Institute for Quality and Efficiency in Health Care (IQWiG)][Cologne (Germany)]"'
   //   const content = 'Relationship between volume of services and quality of treatment outcome for surgical treatment of lung carcinoma IQWiG Reports – Commission No. V18-03'
@@ -493,8 +493,8 @@ describe('tests for function highlightByQuery derived by faults found in Europe 
   })
 })
 
-describe('other tests for function highlightByQuery', () => {
-  test('TITLE:blood AND CONTENT:cell', () => {
+describe('tests for the options argument', () => {
+  test('test the validFields option', () => {
     const query = 'TITLE:blood AND CONTENT:cell'
     const content =
       'A molecular map of lymph node blood vascular endothelium at single cell resolution'
@@ -506,7 +506,19 @@ describe('other tests for function highlightByQuery', () => {
     expect(received).toBe(expected)
   })
 
-  test('TITLE:blood OR CONTENT:cell', () => {
+  // test('test the validFields option', () => {
+  //   const query = 'TITLE:blood OR cell'
+  //   const content =
+  //     'A molecular map of lymph node blood vascular endothelium at single cell resolution'
+  //   const received = highlightByQuery(query, content, {
+  //     validFields: ['TITLE']
+  //   })
+  //   const expected =
+  //     'A molecular map of lymph node <span id="highlight-0" class="highlight">blood</span> vascular endothelium at single <span id="highlight-1" class="highlight">cell</span> resolution'
+  //   expect(received).toBe(expected)
+  // })
+
+  test('test the highlightedFields option', () => {
     const query = 'TITLE:blood OR CONTENT:cell'
     const content =
       'A molecular map of lymph node blood vascular endothelium at single cell resolution'
@@ -519,22 +531,10 @@ describe('other tests for function highlightByQuery', () => {
     expect(received).toBe(expected)
   })
 
-  test('TITLE:blood OR cell', () => {
-    const query = 'TITLE:blood OR cell'
-    const content =
-      'A molecular map of lymph node blood vascular endothelium at single cell resolution'
-    const received = highlightByQuery(query, content, {
-      validFields: ['TITLE']
-    })
-    const expected =
-      'A molecular map of lymph node <span id="highlight-0" class="highlight">blood</span> vascular endothelium at single <span id="highlight-1" class="highlight">cell</span> resolution'
-    expect(received).toBe(expected)
-  })
-
-  test('blood', () => {
+  test('test the highlightAll option', () => {
     const query = 'blood'
     const content =
-      'Pediatric non-red cell blood product transfusion practices: what\'s the evidence to guide transfusion of the \'yellow\' blood products?'
+      "Pediatric non-red cell blood product transfusion practices: what's the evidence to guide transfusion of the 'yellow' blood products?"
     const received = highlightByQuery(query, content, {
       highlightAll: false
     })
@@ -543,7 +543,7 @@ describe('other tests for function highlightByQuery', () => {
     expect(received).toBe(expected)
   })
 
-  test('breast cancer', () => {
+  test('test the highlightIdPattern option', () => {
     const query = 'breast cancer'
     const content =
       'Editorial: The Role of Breast Cancer Stem Cells in Clinical Outcomes.'
@@ -551,11 +551,11 @@ describe('other tests for function highlightByQuery', () => {
       highlightIdPattern: 'new-highlight-'
     })
     const expected =
-      'Editorial: The Role of <span id=\"new-highlight-0\" class=\"highlight\">Breast</span> <span id=\"new-highlight-1\" class=\"highlight\">Cancer</span> Stem Cells in Clinical Outcomes.'
+      'Editorial: The Role of <span id="new-highlight-0" class="highlight">Breast</span> <span id="new-highlight-1" class="highlight">Cancer</span> Stem Cells in Clinical Outcomes.'
     expect(received).toBe(expected)
   })
 
-  test('breast cancer', () => {
+  test('test the highlightClass option', () => {
     const query = 'breast cancer'
     const content =
       'Editorial: The Role of Breast Cancer Stem Cells in Clinical Outcomes.'
@@ -563,17 +563,27 @@ describe('other tests for function highlightByQuery', () => {
       highlightClass: 'new-highlight'
     })
     const expected =
-      'Editorial: The Role of <span id=\"highlight-0\" class=\"new-highlight\">Breast</span> <span id=\"highlight-1\" class=\"new-highlight\">Cancer</span> Stem Cells in Clinical Outcomes.'
+      'Editorial: The Role of <span id="highlight-0" class="new-highlight">Breast</span> <span id="highlight-1" class="new-highlight">Cancer</span> Stem Cells in Clinical Outcomes.'
+    expect(received).toBe(expected)
+  })
+
+  test('test the caseSensitive option', () => {
+    const query = 'covid-19'
+    const content = 'Clinical observation and management of COVID-19 patients.'
+    const received = highlightByQuery(query, content, {
+      caseSensitive: true
+    })
+    const expected = 'Clinical observation and management of COVID-19 patients.'
     expect(received).toBe(expected)
   })
 })
 
-describe('tests for function isStopWord', () => {
-  test('return true', () => {
+describe('tests for the isStopWord function', () => {
+  test('is a stop word', () => {
     const received = isStopWord('of')
     expect(received).toBeTruthy()
   })
-  test('return false', () => {
+  test('is not a stop word', () => {
     const received = isStopWord('I')
     expect(received).toBeFalsy()
   })

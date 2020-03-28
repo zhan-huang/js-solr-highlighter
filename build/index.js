@@ -21,17 +21,19 @@ function isStopWord(string) {
 
 
 function highlightByQuery(query, content, options = {}) {
+  // can allow more options of text-annotator***
   const {
     validFields,
     highlightAll,
     highlightClass,
     highlightedFields,
-    highlightIdPattern
+    highlightIdPattern,
+    caseSensitive
   } = options;
   const searchFunc = highlightAll === undefined || highlightAll ? 'searchAll' : 'search';
   let words = [];
 
-  const lucene = require('lucene'); // possible: [\+\-\!\(\)\{\}\[\]\^\"\?\:\\\&\|\'\/\s\*\~]
+  const lucene = require('lucene'); // [\+\-\!\(\)\{\}\[\]\^\"\?\:\\\&\|\'\/\s\*\~]
 
 
   const esc = (s, c) => {
@@ -46,13 +48,13 @@ function highlightByQuery(query, content, options = {}) {
     return s.replace(regex, (match, char) => {
       return char;
     });
-  }; // escape invalid fields and char
+  }; // escape invalid fields
 
 
   let q = query;
   const fieldVals = [];
-  const fieldVals2 = []; // possible: /([^:\s]+):([^:\s]+)/g
-  // xxx:xxx, xxx: xxx
+  const fieldVals2 = []; // /([^:\s]+):([^:\s]+)/g
+  // deal with cases like xxx:xxx, xxx: xxx
 
   let regex = /([^(\s]+):\s?([^\s)"]+)/g;
   let res;
@@ -61,18 +63,11 @@ function highlightByQuery(query, content, options = {}) {
     const field = res[1];
     const fieldVal = res[0];
 
-    if (validFields === undefined || validFields.includes(field)) {
-      // remove invalid "
-      if (res[2].startsWith('"') && !res[2].endsWith('"')) {
-        fieldVals.push([fieldVal, res[1] + ':' + res[2].substring(1)]);
-      } else if (!res[2].startsWith('"') && res[2].endsWith('"')) {
-        fieldVals.push(fieldVal, res[1] + ':' + res[2].substring(0, res[2].length - 1));
-      }
-    } else {
+    if (validFields !== undefined && !validFields.includes(field)) {
       fieldVals2.push(fieldVal);
     }
-  } // possible: , /([a-zA-Z]+)(\s+):(\s+)([a-zA-Z]+)/g
-  // xxx:"xxx" xxx:"xxx
+  } // /([a-zA-Z]+)(\s+):(\s+)([a-zA-Z]+)/g
+  // deal with cases like xxx:"xxx", xxx:"xxx
 
 
   const regex2 = /([^\s(]+):\s?("[^"]+"?[^)])/g;
@@ -101,13 +96,14 @@ function highlightByQuery(query, content, options = {}) {
   });
   q = esc(q, '/'); // parse the query
 
-  const ast = lucene.parse(q);
+  const ast = lucene.parse(q); // add terms to be highlighted
+
   const {
     start,
     left,
     right,
     operator
-  } = ast; // add terms to be highlighted
+  } = ast;
 
   const addTerm = (words, term, quoted) => {
     term = unesc(term, ':');
@@ -124,7 +120,7 @@ function highlightByQuery(query, content, options = {}) {
 
   const astString = JSON.stringify(ast);
   const allOperators = astString.match(/"operator":"([^(,)]+)"/g);
-  const allFields = astString.match(/"field":"([^(,)]+)"/g); // the !left.quoted condition is not elegant
+  const allFields = astString.match(/"field":"([^(,)]+)"/g); // the !left.quoted condition is not elegant***
 
   if (allOperators && allOperators.every(operator => operator === '"operator":"<implicit>"') && allFields && allFields.every(field => field === '"field":"<implicit>"') && !left.quoted) {
     words = addTerm(words, q, false);
@@ -135,7 +131,7 @@ function highlightByQuery(query, content, options = {}) {
       highlightedFields.push('<implicit>');
     }
 
-    const canHighlight = field => highlightedFields === undefined ? field : highlightedFields.includes(field); // not an elegant solution
+    const canHighlight = field => highlightedFields === undefined ? field : highlightedFields.includes(field); // not an elegant solution***
 
 
     if (!canHighlight(left.field) && operator === '<implicit>' && right && right.field === '<implicit>' && !allParentheses) {
@@ -164,7 +160,7 @@ function highlightByQuery(query, content, options = {}) {
       }
     }
   } // highlight one word by another
-  // some filters may be moved above
+  // some filters may be moved up***
 
 
   words = words.filter(word => word.length && !isStopWord(word) && !['AND', 'OR', 'NOT'].includes(word));
@@ -177,7 +173,7 @@ function highlightByQuery(query, content, options = {}) {
     words.forEach(word => {
       let res = highlighter[searchFunc](word, {
         directSearchOptions: {
-          caseSensitive: false
+          caseSensitive: caseSensitive !== undefined && caseSensitive
         }
       });
       res = searchFunc === 'search' ? [res] : res;
@@ -188,14 +184,14 @@ function highlightByQuery(query, content, options = {}) {
         const fixVaild = c => {
           const letters = /^[0-9a-zA-Z]+$/;
           return !c.match(letters);
-        }; // make sure we do not highlight part of a word; can be moved up
+        }; // make sure we do not highlight part of a word
+        // this logic may be moved up***
 
 
         const prevCharValid = loc[0] === 0 || fixVaild(text.charAt(loc[0] - 1));
         const nextCharValid = loc[1] === text.length - 1 || fixVaild(text.charAt(loc[1]));
 
         if (prevCharValid && nextCharValid) {
-          // highlight options can be made customised
           newContent = highlighter.highlight(highlightIndex, {
             content: newContent,
             returnContent: true,
