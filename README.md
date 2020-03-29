@@ -38,7 +38,7 @@ var highlightedContent = highlightByQuery(query, content, options)
 ```
 
 ## Options
-| Field       | Type | Description |
+| Field | Type | Description |
 | ---- | ---- | ---- |
 | validFields | array | validFields are those parsed as fields.<br />If undefined, all will be parsed as fields if they are like x:x |
 | highlightedFields | array | highlightedFields are those among validFields whose values will be highlighted.<br />If undefined, the values of all valid fields will be highlighted. |
@@ -48,6 +48,16 @@ var highlightedContent = highlightByQuery(query, content, options)
 | caseSensitive | boolean | caseSensitive indicates whether to ignore case when highlighting.<br />If undefined, it is false (ignore).
 
 ## Highlighting rules
+| Rule | Examples |
+| ---- | ---- |
+| If the query has only text and has no fields, highlight each word in it. | If the query is `methylation test`, `methylation` and `test` will be highlighted if they appear in the content. |
+| If the field is valid, highlight its value. | If the query is `TITLE:blood` and `TITLE` is a valid field, highlight `blood` if it appears in the content. |
+| Do not highlight part of a word in the content. | If the query is `bloo` and the content has no such word but has the word `blood`, do not highlight `bloo` in `blood`. |
+| Highlight both the text or field values that the `AND` or `OR` operator takes. | If the query is `blood AND TITLE:cancer` and `TITLE` is a valid field, highlight both `blood` and `cancer` in the content if they exist. |
+| Do not highlight the text or field value that the `NOT` operator takes. | If the query is `NOT blood AND cancer`, highlight `cancer` but not `blood`. |
+| Highlight the text or field values within parentheses. | If the query is `(blood) AND (TITLE:cancer)` and `TITLE` is a valid field, both `blood` and `cancer` will be highlighted if possible. |
+| Do not highlight the Solr stop words. | If the query is `a theory-based study`, Do not highlight `a` but the other words. |
+| If the text or the value of a valid field is within parentheses, highlight the EXACT text/value. | If the query is `"breast cancer"`, do not highlight `breast` or `cancer` if it only appears as the single word without the other following or being followed. |
 
 ## Contact
 [Zhan Huang](mailto:z2hm@outlook.com "Zhan Huang")
