@@ -57,7 +57,7 @@ var highlightedContent = highlightByQuery(query, content, options)
 | Do not highlight the text or field value that the `NOT` operator takes. | If the query is `NOT blood AND cancer`, highlight `cancer` but not `blood`. |
 | Highlight the text or field values within parentheses. | If the query is `(blood) AND (TITLE:cancer)` and `TITLE` is a valid field, both `blood` and `cancer` will be highlighted if possible. |
 | Do not highlight the Solr stop words. | If the query is `a theory-based study`, Do not highlight `a` but the other words. |
-| If the text or the value of a valid field is within parentheses, highlight the EXACT text/value. | If the query is `"breast cancer"`, do not highlight `breast` or `cancer` if it only appears as the single word without the other following or being followed. |
+| If the text or the value of a valid field is within parentheses, highlight the EXACT text/value. | If the query is `"breast cancer"`, do not highlight `breast` or `cancer` if it appears without the other following or being followed. |
 
 ## Contact
 [Zhan Huang](mailto:z2hm@outlook.com "Zhan Huang")
