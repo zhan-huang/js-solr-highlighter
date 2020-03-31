@@ -7,7 +7,7 @@ The general highlighting process is:
 2. Highlight the derived text in the HTML
 
 ## An example from Europe PMC
-js-solr-highlighter has been used to highlight the article titles in the search results of [Europe PMC](https://europepmc.org "Europe PMC"). An example is https://europepmc.org/search?query=blood%20AND%20TITLE%3Acancer
+js-solr-highlighter has been used to highlight the article titles in the search results of [Europe PMC](https://europepmc.org "Europe PMC"), an open science platform that enables access to a worldwide collection of life science publications. An example is https://europepmc.org/search?query=blood%20AND%20TITLE%3Acancer
 !["an example from Europe PMC" "an example from Europe PMC"](example.JPG)
 
 ## Basic usage
