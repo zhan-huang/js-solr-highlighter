@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "lucene": "^2.1.1",
-    "text-annotator": "^0.7.5"
+    "text-annotator": "^0.8.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

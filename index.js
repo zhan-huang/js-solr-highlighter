@@ -234,8 +234,6 @@ function highlightByQuery(query, content, options = {}) {
           loc[1] === text.length - 1 || fixVaild(text.charAt(loc[1]))
         if (prevCharValid && nextCharValid) {
           newContent = highlighter.highlight(highlightIndex, {
-            content: newContent,
-            returnContent: true,
             highlightIdPattern,
             highlightClass
           })
