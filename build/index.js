@@ -193,8 +193,6 @@ function highlightByQuery(query, content, options = {}) {
 
         if (prevCharValid && nextCharValid) {
           newContent = highlighter.highlight(highlightIndex, {
-            content: newContent,
-            returnContent: true,
             highlightIdPattern,
             highlightClass
           });
