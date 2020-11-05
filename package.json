@@ -4,9 +4,8 @@
   "description": "A JavaScript library for highlighting HTML text based on the query in the lucene/solr query syntax",
   "main": "build/index.js",
   "scripts": {
-    "build": "babel index.js -d build",
-    "lint": "./node_modules/.bin/eslint index.js index.test.js --fix",
-    "lint:nofix": "./node_modules/.bin/eslint index.js --max-warnings 0",
+    "build": "tsc --project tsconfig.json",
+    "lint": "eslint index.ts index.test.js --quiet --fix",
     "test": "jest"
   },
   "repository": {
@@ -21,14 +20,17 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
+    "@types/node": "^14.14.6",
     "babel-jest": "^24.7.1",
-    "eslint": "^5.15.3",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-jest": "^22.4.1",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "jest": "^24.5.0",
     "pre-commit": "^1.2.2",
-    "prettier": "1.18.2"
+    "prettier": "^2.1.2",
+    "typescript": "^4.0.5"
   },
   "babel": {
     "presets": [
@@ -42,37 +44,9 @@
       ]
     ]
   },
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "commonjs": true,
-      "es6": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:jest/recommended",
-      "plugin:prettier/recommended"
-    ],
-    "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-      "ecmaVersion": 2018,
-      "sourceType": "module"
-    },
-    "plugins": [
-      "prettier"
-    ]
-  },
   "pre-commit": [
-    "lint:nofix",
     "test"
   ],
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
-  },
   "keywords": [
     "Lucene",
     "Query",
