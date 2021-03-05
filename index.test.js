@@ -150,9 +150,9 @@ describe("tests with Europe PMC's standard query set", () => {
       'VOLUME',
       '_version_',
       'text_hl',
-      'text_synonyms'
+      'text_synonyms',
     ],
-    highlightedFields: ['TITLE', '<implicit>']
+    highlightedFields: ['TITLE', '<implicit>'],
   }
 
   test('methylation test', () => {
@@ -335,7 +335,7 @@ describe("tests with Europe PMC's standard query set", () => {
   })
 
   // throw errors but work; improve later***
-  // test('PUBLISHER:"[Institute for Quality and Efficiency in Health Care (IQWiG)][Cologne (Germany)]"', () => {
+  // ('PUBLISHER:"[Institute for Quality and Efficiency in Health Care (IQWiG)][Cologne (Germany)]"', () => {
   //   const query = 'PUBLISHER:"[Institute for Quality and Efficiency in Health Care (IQWiG)][Cologne (Germany)]"'
   //   const content = 'Relationship between volume of services and quality of treatment outcome for surgical treatment of lung carcinoma IQWiG Reports – Commission No. V18-03'
   //   const received = highlightByQuery(query, content, options)
@@ -343,7 +343,7 @@ describe("tests with Europe PMC's standard query set", () => {
   //   expect(received).toThrowError(/SyntaxError/)
   // })
 
-  // test('PUBLISHER:"[Canadian Agency for Drugs and Technologies in Health][Ottawa (ON)]', () => {
+  // ('PUBLISHER:"[Canadian Agency for Drugs and Technologies in Health][Ottawa (ON)]', () => {
   //   const query = 'PUBLISHER:"[Canadian Agency for Drugs and Technologies in Health][Ottawa (ON)]'
   //   const content = 'Codeine for Acute Pain for Urological or General Surgery Patients: A Review of Clinical Effectiveness'
   //   const received = highlightByQuery(query, content, options)
@@ -494,19 +494,19 @@ describe("tests with Europe PMC's standard query set", () => {
 })
 
 describe('tests for the options argument', () => {
-  test('test the validFields option', () => {
+  test('the validFields option', () => {
     const query = 'TITLE:blood AND CONTENT:cell'
     const content =
       'A molecular map of lymph node blood vascular endothelium at single cell resolution'
     const received = highlightByQuery(query, content, {
-      validFields: ['TITLE']
+      validFields: ['TITLE'],
     })
     const expected =
       'A molecular map of lymph node <span id="highlight-0" class="highlight">blood</span> vascular endothelium at single cell resolution'
     expect(received).toBe(expected)
   })
 
-  // test('test the validFields option', () => {
+  // ('the validFields option', () => {
   //   const query = 'TITLE:blood OR cell'
   //   const content =
   //     'A molecular map of lymph node blood vascular endothelium at single cell resolution'
@@ -518,60 +518,60 @@ describe('tests for the options argument', () => {
   //   expect(received).toBe(expected)
   // })
 
-  test('test the highlightedFields option', () => {
+  test('the highlightedFields option', () => {
     const query = 'TITLE:blood OR CONTENT:cell'
     const content =
       'A molecular map of lymph node blood vascular endothelium at single cell resolution'
     const received = highlightByQuery(query, content, {
       validFields: ['TITLE', 'CONTENT'],
-      highlightedFields: ['CONTENT']
+      highlightedFields: ['CONTENT'],
     })
     const expected =
       'A molecular map of lymph node blood vascular endothelium at single <span id="highlight-0" class="highlight">cell</span> resolution'
     expect(received).toBe(expected)
   })
 
-  test('test the highlightAll option', () => {
+  test('the highlightAll option', () => {
     const query = 'blood'
     const content =
       "Pediatric non-red cell blood product transfusion practices: what's the evidence to guide transfusion of the 'yellow' blood products?"
     const received = highlightByQuery(query, content, {
-      highlightAll: false
+      highlightAll: false,
     })
     const expected =
       'Pediatric non-red cell <span id="highlight-0" class="highlight">blood</span> product transfusion practices: what\'s the evidence to guide transfusion of the \'yellow\' blood products?'
     expect(received).toBe(expected)
   })
 
-  test('test the highlightIdPattern option', () => {
+  test('the highlightIdPattern option', () => {
     const query = 'breast cancer'
     const content =
       'Editorial: The Role of Breast Cancer Stem Cells in Clinical Outcomes.'
     const received = highlightByQuery(query, content, {
-      highlightIdPattern: 'new-highlight-'
+      highlightIdPattern: 'new-highlight-',
     })
     const expected =
       'Editorial: The Role of <span id="new-highlight-0" class="highlight">Breast</span> <span id="new-highlight-1" class="highlight">Cancer</span> Stem Cells in Clinical Outcomes.'
     expect(received).toBe(expected)
   })
 
-  test('test the highlightClass option', () => {
+  test('the highlightClass option', () => {
     const query = 'breast cancer'
     const content =
       'Editorial: The Role of Breast Cancer Stem Cells in Clinical Outcomes.'
     const received = highlightByQuery(query, content, {
-      highlightClass: 'new-highlight'
+      highlightClass: 'new-highlight',
     })
     const expected =
       'Editorial: The Role of <span id="highlight-0" class="new-highlight">Breast</span> <span id="highlight-1" class="new-highlight">Cancer</span> Stem Cells in Clinical Outcomes.'
     expect(received).toBe(expected)
   })
 
-  test('test the caseSensitive option', () => {
+  test('the caseSensitive option', () => {
     const query = 'covid-19'
     const content = 'Clinical observation and management of COVID-19 patients.'
     const received = highlightByQuery(query, content, {
-      caseSensitive: true
+      caseSensitive: true,
     })
     const expected = 'Clinical observation and management of COVID-19 patients.'
     expect(received).toBe(expected)

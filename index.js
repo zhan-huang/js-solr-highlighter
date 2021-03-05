@@ -35,7 +35,7 @@ const STOP_WORDS = [
   'to',
   'was',
   'will',
-  'with'
+  'with',
 ]
 
 function isStopWord(string) {
@@ -52,7 +52,7 @@ function highlightByQuery(query, content, options = {}) {
     highlightClass,
     highlightedFields,
     highlightIdPattern,
-    caseSensitive
+    caseSensitive,
   } = options
   const searchFunc =
     highlightAll === undefined || highlightAll ? 'searchAll' : 'search'
@@ -63,7 +63,7 @@ function highlightByQuery(query, content, options = {}) {
   // [\+\-\!\(\)\{\}\[\]\^\"\?\:\\\&\|\'\/\s\*\~]
   const esc = (s, c) => {
     const regex = new RegExp(c, 'g')
-    return s.replace(regex, char => {
+    return s.replace(regex, (char) => {
       return '\\' + char
     })
   }
@@ -109,10 +109,10 @@ function highlightByQuery(query, content, options = {}) {
       fieldVals2.push(fieldVal)
     }
   }
-  fieldVals.forEach(fv => {
+  fieldVals.forEach((fv) => {
     q = q.replace(fv[0], fv[1])
   })
-  fieldVals2.forEach(fv => {
+  fieldVals2.forEach((fv) => {
     q = q.replace(fv, esc(fv, ':'))
   })
   q = esc(q, '/')
@@ -132,7 +132,9 @@ function highlightByQuery(query, content, options = {}) {
       // remove any char that is neither letter nor number at the start and end of each term
       const terms = term
         .split(/\s/)
-        .map(t => t.replace(/^[^a-zA-Z0-9]+/, '').replace(/[^a-zA-Z0-9]+$/, ''))
+        .map((t) =>
+          t.replace(/^[^a-zA-Z0-9]+/, '').replace(/[^a-zA-Z0-9]+$/, '')
+        )
       return words.concat(terms)
     }
   }
@@ -142,9 +144,9 @@ function highlightByQuery(query, content, options = {}) {
   // the !left.quoted condition is not elegant***
   if (
     allOperators &&
-    allOperators.every(operator => operator === '"operator":"<implicit>"') &&
+    allOperators.every((operator) => operator === '"operator":"<implicit>"') &&
     allFields &&
-    allFields.every(field => field === '"field":"<implicit>"') &&
+    allFields.every((field) => field === '"field":"<implicit>"') &&
     !left.quoted
   ) {
     words = addTerm(words, q, false)
@@ -156,7 +158,7 @@ function highlightByQuery(query, content, options = {}) {
     ) {
       highlightedFields.push('<implicit>')
     }
-    const canHighlight = field =>
+    const canHighlight = (field) =>
       highlightedFields === undefined
         ? field
         : highlightedFields.includes(field)
@@ -204,26 +206,26 @@ function highlightByQuery(query, content, options = {}) {
   // highlight one word by another
   // some filters may be moved up***
   words = words.filter(
-    word =>
+    (word) =>
       word.length && !isStopWord(word) && !['AND', 'OR', 'NOT'].includes(word)
   )
   let newContent = content
   if (words.length) {
     const highlighter = new TextAnnotator({
-      content
+      content,
     })
-    words.forEach(word => {
+    words.forEach((word) => {
       let res = highlighter[searchFunc](word, {
         directSearchOptions: {
-          caseSensitive: caseSensitive !== undefined && caseSensitive
-        }
+          caseSensitive: caseSensitive !== undefined && caseSensitive,
+        },
       })
       res = searchFunc === 'search' ? [res] : res
-      res.forEach(highlightIndex => {
+      res.forEach((highlightIndex) => {
         const loc = highlighter.highlights[highlightIndex].loc
         const text = highlighter.stripedHTML
 
-        const fixVaild = c => {
+        const fixVaild = (c) => {
           const letters = /^[0-9a-zA-Z]+$/
           return !c.match(letters)
         }
@@ -235,7 +237,7 @@ function highlightByQuery(query, content, options = {}) {
         if (prevCharValid && nextCharValid) {
           newContent = highlighter.highlight(highlightIndex, {
             highlightIdPattern,
-            highlightClass
+            highlightClass,
           })
         }
       })
