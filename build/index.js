@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isStopWord = isStopWord;
-exports.highlightByQuery = highlightByQuery;
 exports.STOP_WORDS = void 0;
+exports.highlightByQuery = highlightByQuery;
+exports.isStopWord = isStopWord;
 
 var _textAnnotator = _interopRequireDefault(require("text-annotator"));
 

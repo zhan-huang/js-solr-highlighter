@@ -6,7 +6,6 @@
   "scripts": {
     "build": "babel index.js -d build",
     "lint": "./node_modules/.bin/eslint index.js index.test.js --fix",
-    "lint:nofix": "./node_modules/.bin/eslint index.js --max-warnings 0",
     "test": "jest"
   },
   "repository": {
@@ -18,17 +17,16 @@
     "text-annotator": "^0.8.7"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.0",
-    "@babel/core": "^7.13.8",
-    "@babel/preset-env": "^7.13.9",
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.21.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-jest": "^24.1.5",
-    "eslint-plugin-prettier": "^3.3.1",
-    "jest": "^26.6.3",
-    "pre-commit": "^1.2.2",
-    "prettier": "2.2.1"
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "babel-jest": "^28.1.1",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.1",
+    "prettier": "2.7.1"
   },
   "babel": {
     "presets": [
@@ -65,10 +63,6 @@
       "prettier"
     ]
   },
-  "pre-commit": [
-    "lint:nofix",
-    "test"
-  ],
   "prettier": {
     "semi": false,
     "singleQuote": true
