@@ -1,4 +1,4 @@
-import { isStopWord, highlightByQuery } from './index.js'
+import { isStopWord, highlightByQuery } from './dist/index.js'
 
 describe("tests with Europe PMC's standard query set", () => {
   const options = {

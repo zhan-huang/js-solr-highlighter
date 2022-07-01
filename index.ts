@@ -1,5 +1,14 @@
 import TextAnnotator from 'text-annotator'
 
+type HighlightOptions = {
+  validFields?: string[],
+  highlightAll?: boolean,
+  highlightClass?: string,
+  highlightedFields?: string[],
+  highlightIdPattern?: string,
+  caseSensitive?: boolean
+}
+
 const STOP_WORDS = [
   'a',
   'an',
@@ -38,13 +47,13 @@ const STOP_WORDS = [
   'with',
 ]
 
-function isStopWord(string) {
+function isStopWord(string: string): boolean {
   return STOP_WORDS.includes(string.toLowerCase())
 }
 
 // validFields are those parsed as fields. If undefined, all will be parsed as fields if they are like x:x
 // highlightedFields are those among validFields whose values will be highlighted. If undefined, the values of all valid fields will be highlighted
-function highlightByQuery(query, content, options = {}) {
+function highlightByQuery(query: string, content: string, options: HighlightOptions = {}): string {
   // can allow more options of text-annotator***
   const {
     validFields,
@@ -57,17 +66,17 @@ function highlightByQuery(query, content, options = {}) {
   const searchFunc =
     highlightAll === undefined || highlightAll ? 'searchAll' : 'search'
 
-  let words = []
+  let words: string[] = []
 
   const lucene = require('lucene')
   // [\+\-\!\(\)\{\}\[\]\^\"\?\:\\\&\|\'\/\s\*\~]
-  const esc = (s, c) => {
+  const esc = (s: string, c: string) => {
     const regex = new RegExp(c, 'g')
     return s.replace(regex, (char) => {
       return '\\' + char
     })
   }
-  const unesc = (s, c) => {
+  const unesc = (s: string, c: string) => {
     const regex = new RegExp('\\\\([' + c + '])', 'g')
     return s.replace(regex, (match, char) => {
       return char
@@ -80,8 +89,8 @@ function highlightByQuery(query, content, options = {}) {
   const fieldVals2 = []
   // /([^:\s]+):([^:\s]+)/g
   // deal with cases like xxx:xxx, xxx: xxx
-  let regex = /([^(\s]+):\s?([^\s)"]+)/g
-  let res
+  const regex = /([^(\s]+):\s?([^\s)"]+)/g
+  let res: RegExpExecArray
   while ((res = regex.exec(q)) !== null) {
     const field = res[1]
     const fieldVal = res[0]
@@ -122,7 +131,7 @@ function highlightByQuery(query, content, options = {}) {
 
   // add terms to be highlighted
   const { start, left, right, operator } = ast
-  const addTerm = (words, term, quoted) => {
+  const addTerm = (words: string[], term: string, quoted: boolean) => {
     term = unesc(term, ':')
     term = unesc(term, '/')
     // if quoted, should change nothing inside
@@ -158,7 +167,7 @@ function highlightByQuery(query, content, options = {}) {
     ) {
       highlightedFields.push('<implicit>')
     }
-    const canHighlight = (field) =>
+    const canHighlight = (field: string) =>
       highlightedFields === undefined
         ? field
         : highlightedFields.includes(field)
@@ -221,11 +230,11 @@ function highlightByQuery(query, content, options = {}) {
         },
       })
       res = searchFunc === 'search' ? [res] : res
-      res.forEach((highlightIndex) => {
+      res.forEach((highlightIndex: number) => {
         const loc = highlighter.highlights[highlightIndex].loc
         const text = highlighter.stripedHTML
 
-        const fixVaild = (c) => {
+        const fixVaild = (c: string) => {
           const letters = /^[0-9a-zA-Z]+$/
           return !c.match(letters)
         }
