@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.highlightByQuery = exports.isStopWord = exports.STOP_WORDS = void 0;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const text_annotator_1 = require("text-annotator");
 const STOP_WORDS = [
     'a',

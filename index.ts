@@ -92,7 +92,7 @@ function highlightByQuery(query: string, content: string, options: HighlightOpti
   // /([^:\s]+):([^:\s]+)/g
   // deal with cases like xxx:xxx, xxx: xxx
   const regex = /([^(\s]+):\s?([^\s)"]+)/g
-  let res: RegExpExecArray
+  let res: RegExpExecArray | null
   while ((res = regex.exec(q)) !== null) {
     const field = res[1]
     const fieldVal = res[0]
