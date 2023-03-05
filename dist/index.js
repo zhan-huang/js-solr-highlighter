@@ -123,7 +123,7 @@ function highlightByQuery(query, content, options = {}) {
             // remove any char that is neither letter nor number at the start and end of each term
             const terms = term
                 .split(/\s/)
-                .map((t) => t.replace(/^[^a-zA-Z0-9]+/, '').replace(/[^a-zA-Z0-9]+$/, ''));
+                .map((t) => t.replace(/^[^a-zA-Z0-9]+/, '').replace(/[^a-zA-Z0-9\*]+$/, ''));
             return words.concat(terms);
         }
     };
@@ -183,9 +183,19 @@ function highlightByQuery(query, content, options = {}) {
             }
         }
     }
-    // highlight one word by another
     // some filters may be moved up***
     words = words.filter((word) => word.length && !isStopWord(word) && !['AND', 'OR', 'NOT'].includes(word));
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].endsWith('*')) {
+            words[i] = words[i].slice(0, words[i].length - 1);
+            let index = content.indexOf(words[i]) + words[i].length;
+            while (content[index] !== ' ' && index !== content.length - 1) {
+                words[i] += content[index];
+                index++;
+            }
+        }
+    }
+    // highlight one word by another
     let newContent = content;
     if (words.length) {
         const highlighter = new text_annotator_1.default({

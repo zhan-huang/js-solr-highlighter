@@ -576,6 +576,16 @@ describe('tests for the options argument', () => {
     const expected = 'Clinical observation and management of COVID-19 patients.'
     expect(received).toBe(expected)
   })
+
+  test('fuzzy query *', () => {
+    const query = 'Bre*'
+    const content = 
+      'Editorial: The Role of Breast Cancer Stem Cells in Clinical Outcomes.'
+    const received = highlightByQuery(query, content)
+    const expected =
+      'Editorial: The Role of <span id="highlight-0" class="highlight">Breast</span> Cancer Stem Cells in Clinical Outcomes.'
+    expect(received).toBe(expected)
+  })
 })
 
 describe('tests for the isStopWord function', () => {
